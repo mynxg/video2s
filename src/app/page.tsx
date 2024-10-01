@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { DotPattern } from "@/components/ui/dot-pattern";
@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import Safari from "@/components/ui/safari";
 
-export default function Home() {
+function HomeContent() {
   const [inputUrl, setInputUrl] = useState("");
   const [safariSrc, setSafariSrc] = useState("");
   const [safariUrl, setSafariUrl] = useState("bilibili.com");
@@ -94,5 +94,13 @@ export default function Home() {
         )}
       />
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div>加载中...</div>}>
+      <HomeContent />
+    </Suspense>
   );
 }
