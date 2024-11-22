@@ -9,6 +9,11 @@ import { Input } from "@/components/ui/input";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import Safari from "@/components/ui/safari";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import YutubeIcon from '@/components/icon/YutubeIcon';
+import BilibiliIcon from '@/components/icon/BilibiliIcon';
+
 function HomeContent() {
   const [inputUrl, setInputUrl] = useState("");
   const [safariSrc, setSafariSrc] = useState("");
@@ -24,6 +29,7 @@ function HomeContent() {
     }
   }, [searchParams]);
 
+  // 获取主域名
   const getMainDomain = (url: string) => {
     try {
       const hostname = new URL(url).hostname;
@@ -34,11 +40,12 @@ function HomeContent() {
     }
   };
 
+  //解析视频
   const handleDownload = async (url: string = inputUrl) => {
     try {
       setIsLoading(true);
       setSafariUrl(getMainDomain(url));
-      const response = await fetch("/api/download", {
+      const response = await fetch("/api/parser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -46,9 +53,18 @@ function HomeContent() {
         body: JSON.stringify({ url }),
       });
       const data = await response.json();
-      setSafariSrc(data.videoUrl);
+      //setSafariSrc(data.videoUrl);
+      if (data.dataResponse.code === 0) {
+        setSafariUrl(getMainDomain(data.dataResponse.data.url));
+        setSafariSrc(data.dataResponse.data.url);
+      } else {
+        console.error("下载失败:", data.dataResponse.message);
+        toast.error(`下载失败: ${data.dataResponse.message}`);
+      }
+      // setSafariSrc(data.dataResponse.data.url);
     } catch (error) {
       console.error("下载失败:", error);
+      toast.error(`下载失败: ${error}`);
     } finally {
       setIsLoading(false);
     }
@@ -62,20 +78,22 @@ function HomeContent() {
         </h1>
         <TypingAnimation
           className="mt-4 text-4xl font-500 text-black dark:text-white font-serif"
-          text="Download bilibili video with one click!"
+          text="Download video with one click!"
         />
       </header>
+
+      <ToastContainer />
 
       <div className="z-10 mt-8 flex items-center space-x-4">
         <Input
           className="w-full sm:w-80 h-10"
-          placeholder="Paste your Bilibili video URL here"
+          placeholder="Paste your video URL here"
           value={inputUrl}
           onChange={(e) => setInputUrl(e.target.value)}
           disabled={isLoading}
         />
         <RainbowButton onClick={() => handleDownload(inputUrl)} disabled={isLoading}>
-          {isLoading ? "Downloading..." : "Download"}
+          {isLoading ? "Parsering..." : "Parser"}
         </RainbowButton>
       </div>
 
@@ -85,6 +103,13 @@ function HomeContent() {
           className="size-full"
           src={safariSrc}
         ></Safari>
+        <div className="flex flex-col items-center mt-4 space-y-2">
+          <span className="text-base font-thin">Supported platforms</span>
+          <div className="flex space-x-4">
+            <BilibiliIcon width={40} height={40} />
+            <YutubeIcon width={40} height={40} />
+          </div>
+        </div>
       </div>
 
       <DotPattern
