@@ -49,7 +49,20 @@ REACT_APP_API_URL=http://localhost:8082
 
 ## 后端项目：
 
-接口服务：[MultiSourceVideoDownload](https://github.com/mynxg/MultiSourceVideoDownload)
+API 接口服务：[MultiSourceVideoDownload](https://github.com/mynxg/MultiSourceVideoDownload)
+
+
+## Vercel 部署教程
+登录 [Vercel](https://vercel.com/) 并创建一个新项目。
+
+选择导入 GitHub 仓库，并选择你的项目仓库（video2s）。
+
+在项目设置中，添加环境变量：
+
+VIDEO_APP_API_URL：设置为你的 API 地址，例如 https://your-api-url.com
+点击“Deploy”按钮开始部署。
+
+部署完成后，你可以在 Vercel 提供的域名上访问你的应用。
 
 
 ## 贡献
