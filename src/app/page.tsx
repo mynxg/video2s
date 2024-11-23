@@ -64,7 +64,23 @@ function HomeContent() {
       // setSafariSrc(data.dataResponse.data.url);
     } catch (error) {
       console.error("下载失败:", error);
-      toast.error(`下载失败: ${error}`);
+      //toast.error(`下载失败: ${error}`);
+      try {
+        setIsLoading(true);
+        setSafariUrl(getMainDomain(url));
+        const response = await fetch("/api/download", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ url }),
+        });
+        const data = await response.json();
+        setSafariSrc(data.videoUrl);
+      } catch (error) {
+        console.error("下载失败:", error);
+        toast.error(`备用接口下载失败: ${error}`);
+      } 
     } finally {
       setIsLoading(false);
     }
