@@ -61,14 +61,14 @@ function HomeContent() {
         console.error("下载失败:", data.dataResponse.message);
         toast.error(`下载失败: ${data.dataResponse.message}`);
       }
-      // setSafariSrc(data.dataResponse.data.url);
+      setSafariSrc(data.videoUrl);
     } catch (error) {
       console.error("下载失败:", error);
       //toast.error(`下载失败: ${error}`);
       try {
         setIsLoading(true);
         setSafariUrl(getMainDomain(url));
-        const response = await fetch("/api/download", {
+        const response = await fetch("/api/down", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

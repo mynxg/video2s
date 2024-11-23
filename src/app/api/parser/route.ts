@@ -24,6 +24,21 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({  dataResponse: data });
     } catch (error) {
         console.error("下载失败:", error);
+
+        try {
+            const response = await fetch("/api/down", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ url }),
+              });
+              const dataRes = await response.json();
+              return NextResponse.json({ dataResponse: dataRes.videoUrl });   
+        }catch (error) {
+            console.error("下载失败:", error);
+            return NextResponse.json({ error: "Download failed." }, { status: 500 });
+        }
     }
 
 }
