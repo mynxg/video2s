@@ -1,5 +1,15 @@
 # 视频下载项目
 
+[//]: # ([![]&#40;https://img.shields.io/github/license/mynxg/video2s?color=4D7A97&logo=apache&#41;]&#40;https://github.com/me-shaon/GLWTPL/blob/master/LICENSE&#41;  )
+[![](https://img.shields.io/github/stars/mynxg/video2s)](https://github.com/mynxg/video2s/stargazers)
+[![](https://img.shields.io/github/issues/mynxg/video2s)](https://github.com/mynxg/video2s/issues)
+[![](https://img.shields.io/github/issues-closed/mynxg/video2s)](https://github.com/mynxg/video2s/issues?q=is%3Aissue+is%3Aclosed)
+[![](https://img.shields.io/github/issues-pr/mynxg/video2s)](https://github.com/mynxg/video2s/pulls)
+[![](https://img.shields.io/github/issues-pr-closed/mynxg/video2s)](https://github.com/mynxg/video2s/pulls?q=is%3Apr+is%3Aclosed)
+
+
+[简体中文](README.md) | [English](README-EN.md)
+
 ## 项目介绍
 
 这是一个视频下载项目，支持从多个平台下载视频。目前支持以下平台：
@@ -72,6 +82,8 @@ VIDEO_APP_API_URL：设置为你的 API 地址，例如 https://your-api-url.com
 此项目使用 [GLWTPL](https://github.com/me-shaon/GLWTPL/blob/master/LICENSE) 许可证。
 
 
+## Star History
 
+[![Star History Chart](https://api.star-history.com/svg?repos=mynxg/video2s&type=Date)](https://star-history.com/#mynxg/video2s&Date)
 
 
